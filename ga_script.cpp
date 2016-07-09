@@ -10,8 +10,11 @@
 #include <bitset>
 #include <time.h>
 
+//Tamaño de la poblacion
 #define P_LENGTH 10
+//Largo del array de cromosomas
 #define C_LENGTH 5
+//Número máximo de soluciones a encontrar
 #define C_MAX 31
 
 /*
@@ -24,16 +27,19 @@ typedef struct {
     unsigned int f_x;
 }EstructuraPoblacion;
 
+//Función que genera la población inicial
 void ini_poblacion(EstructuraPoblacion *poblacion);
+//Función para mostrar la población generada
 void muestra_poblacion(EstructuraPoblacion *poblacion);
 
+//Función para generar los cromosomas que representan una solución (individuo)
 void genera_cromosomas(unsigned int x, char *cromosomas);
+//Función para determinar el valor de X
 unsigned int f_x(unsigned int x);
+//Función para generar un número aleatorio
 unsigned int ranged_rand(int min, int max);
 
-/*
- * Funcion main
- */
+//Funcion main
 int main(int argc, char** argv) {
     srand(time(NULL));
     EstructuraPoblacion  poblacion[P_LENGTH];
