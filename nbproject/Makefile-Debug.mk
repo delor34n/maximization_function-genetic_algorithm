@@ -35,7 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/ga_script.o
+	${OBJECTDIR}/code_testing.o \
+	${OBJECTDIR}/ga_script.o \
+	${OBJECTDIR}/hello_world.o
 
 
 # C Compiler Flags
@@ -62,10 +64,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/maximization_function-genetic_algorit
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/maximization_function-genetic_algorithm ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/code_testing.o: code_testing.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/code_testing.o code_testing.c
+
 ${OBJECTDIR}/ga_script.o: ga_script.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ga_script.o ga_script.cpp
+
+${OBJECTDIR}/hello_world.o: hello_world.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hello_world.o hello_world.c
 
 # Subprojects
 .build-subprojects:

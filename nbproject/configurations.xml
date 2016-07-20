@@ -12,7 +12,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>code_testing.c</itemPath>
       <itemPath>ga_script.cpp</itemPath>
+      <itemPath>hello_world.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -36,7 +38,11 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="code_testing.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="ga_script.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="hello_world.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -59,7 +65,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="code_testing.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="ga_script.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="hello_world.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -11,7 +11,7 @@
 #include <time.h>
 
 //Tamaño de la poblacion
-#define P_LENGTH 10
+#define P_LENGTH 5
 //Largo del array de cromosomas
 #define C_LENGTH 5
 //Número máximo de soluciones a encontrar
@@ -21,7 +21,7 @@
  * Estructura para cada sujeto de la poblacion
  */
 typedef struct {
-    unsigned int sujeto_id;
+    int sujeto_id;
     char cromosomas[C_LENGTH];
     unsigned int x;
     unsigned int f_x;
@@ -31,6 +31,12 @@ typedef struct {
 void ini_poblacion(EstructuraPoblacion *poblacion);
 //Función para mostrar la población generada
 void muestra_poblacion(EstructuraPoblacion *poblacion);
+//Función para realizar torneo de selección
+void torneo_seleccion(EstructuraPoblacion *poblacion);
+//Función que genera los rivales que tendrá cada sujeto
+void *genera_rivales(int * rivales);
+//Función para dejar con flag -1 al sujeto que corresponde eliminar
+void borrar_sujeto(EstructuraPoblacion *sujeto);
 
 //Función para generar los cromosomas que representan una solución (individuo)
 void genera_cromosomas(unsigned int x, char *cromosomas);
@@ -42,8 +48,14 @@ unsigned int ranged_rand(int min, int max);
 //Funcion main
 int main(int argc, char** argv) {
     srand(time(NULL));
-    EstructuraPoblacion  poblacion[P_LENGTH];
+
+    EstructuraPoblacion poblacion[P_LENGTH];
     ini_poblacion(poblacion);
+    std::cout << "ANTES DE LA SELECCION" << std::endl;
+    muestra_poblacion(poblacion);
+
+    torneo_seleccion(poblacion);
+    std::cout << "DESPUES DE LA SELECCION" << std::endl;
     muestra_poblacion(poblacion);
     return 0;
 }
@@ -65,6 +77,36 @@ void ini_poblacion(EstructuraPoblacion *poblacion){
         poblacion[i].x = ranged_rand(1, C_MAX);
         poblacion[i].f_x = f_x(poblacion[i].x);
         genera_cromosomas(poblacion[i].x, poblacion[i].cromosomas);
+    }
+}
+
+void torneo_seleccion(EstructuraPoblacion *poblacion){
+    EstructuraPoblacion seleccion[P_LENGTH];
+
+    int * rivales = new (std::nothrow) int[P_LENGTH];
+    genera_rivales(rivales);
+
+    for(int i = 0; i < P_LENGTH; i++){
+        if(poblacion[i].sujeto_id != -1 && poblacion[rivales[i]].sujeto_id != -1){
+            if(poblacion[i].f_x > poblacion[rivales[i]].f_x){
+                seleccion[i] = poblacion[i];
+                seleccion[i+1] = poblacion[i];
+                borrar_sujeto(&poblacion[rivales[i]]);
+            } else {
+                seleccion[i] = poblacion[rivales[i]];
+                seleccion[i+1] = poblacion[rivales[i]];
+                borrar_sujeto(&poblacion[i]);
+            }
+        }
+    }
+    poblacion = seleccion;    
+}
+
+void borrar_sujeto(EstructuraPoblacion *sujeto){ sujeto->sujeto_id = -1; }
+
+void *genera_rivales(int * rivales){
+    for(unsigned int i = 0; i < P_LENGTH; i++){
+        
     }
 }
 
